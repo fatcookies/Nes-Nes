@@ -76,14 +76,6 @@ static inline void ins_adc(uint8_t value) {
 	registers->acc = (uint8_t) temp;
 }
 
-static inline void and(uint8_t value) {
-	value &= registers->acc;
-	SET_SIGN(value);
-	SET_ZERO(value);
-
-	registers->acc = value;
-}
-
 
 static inline void asl(uint8_t mem, uint8_t address) {
 	uint8_t val = mem ? fetch(address) : registers->acc;
@@ -101,13 +93,6 @@ static inline void asl(uint8_t mem, uint8_t address) {
 }
 
 
-inline void bit(uint16_t value) {
-	SET_SIGN(value);
-    SET_OVERFLOW(0x40 & value);	/* Copy bit 6 to OVERFLOW flag. */
-    SET_ZERO(value & registers->acc);
-
-}
-
 inline void brk() {
 	registers->pc++;
     push((registers->pc >> 8) & 0xff);	/* Push return address onto the stack. */
@@ -118,30 +103,6 @@ inline void brk() {
     registers->pc = fetch16(0xFFFE);
 }
 
-inline void cmp(uint16_t address) {
-	//int16_t val = registers->acc - fetch(address);
-	// do something to check comparison + set flags
-}
-
-inline void cmp_immediate() {
-
-}
-
-inline void cpx(uint16_t address) {
-	//int16_t val = registers->x - fetch(address);
-}
-
-inline void cpx_immediate() {
-
-}
-
-inline void cpy(uint16_t address) {
-	//int16_t val = registers->y - fetch(address);
-}
-
-inline void cpy_immediate() {
-	
-}
 
 inline void dec(uint16_t address) {
 	uint8_t a = fetch(address);
