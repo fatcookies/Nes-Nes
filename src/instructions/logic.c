@@ -9,11 +9,19 @@ inline void ins_and(uint8_t value) {
 }
 
 inline void ins_eor(uint8_t value) {
-	
+	value ^= registers->acc;
+	SET_SIGN(value);
+	SET_ZERO(value);
+
+	registers->acc = value;
 }
 
 inline void ins_ora(uint8_t value) {
-	
+	value |= registers->acc;
+	SET_SIGN(value);
+	SET_ZERO(value);
+
+	registers->acc = value;
 }
 
 

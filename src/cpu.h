@@ -33,10 +33,15 @@ reg * registers;
 flag * flags;
 
 #define combine(upper, lower) ((upper<<8) | lower)
-#define IF_CARRY() (flags->carry & 0xFF)
 
-#define SET_CARRY(x) flags->carry = ((x) & 0xFF)
-#define SET_ZERO(x) flags->zero = (x & 0xFF)
+#define IF_CARRY() (flags->carry & 0xFF)
+#define IF_ZERO() (flags->zero & 0xFF)
+#define IF_OVERFLOW() (flags->overflow & 0xFF)
+#define IF_SIGN() (flags->sign & 0xFF)
+
+#define SET_CARRY(x) flags->carry = x ? 1 : 0
+#define SET_DEC(x) flags->dec = x
+#define SET_ZERO(x) flags->zero = x ? 0 : 1
 #define SET_INTERRUPT(x) flags->interrupt = x
 #define SET_BREAK(x) flags->break_cmd = x
 #define SET_OVERFLOW(x) flags->overflow = (x & 0xFF)
@@ -48,7 +53,7 @@ flag * flags;
 void cpu_init();
 void reset();
 
-static inline uint8_t cpu_status();
+inline uint8_t cpu_status();
 inline uint8_t next();
 inline uint16_t next16();
 inline uint16_t fetch16(uint16_t address);
