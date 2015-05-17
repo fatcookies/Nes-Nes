@@ -1,6 +1,6 @@
 #include "loadstore.h"
-#include "cpu.h"
-#include "memory.h"
+#include "../cpu.h"
+#include "../memory.h"
 
 inline void ins_lda(uint8_t value) {
 	SET_SIGN(value);

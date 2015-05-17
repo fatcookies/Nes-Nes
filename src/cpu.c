@@ -6,7 +6,8 @@
 #include "stack.h"
 #include "addressing.h"
 
-#include "loadstore.h"
+#include "instructions/loadstore.h"
+#include "instructions/registertransfer.h"
 
 void cpu_init() {
 	if(registers && flags) {
@@ -30,6 +31,13 @@ void cpu_init() {
 	flags->break_cmd = 0;
 	flags->overflow = 0;
 	flags->sign = 0;
+}
+
+static inline uint8_t cpu_status() {
+	return (flags->carry & 1) | ((flags->zero & 1) << 1) 
+		| ((flags->interrupt & 1) << 2) | ((flags->dec& 1) << 3)
+		| ((flags->break_cmd & 1) << 4) | ((flags->overflow & 1) <<6) 
+		| ((flags->sign & 1) << 7);
 }
 
 void reset() {

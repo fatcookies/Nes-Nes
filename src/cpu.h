@@ -34,15 +34,21 @@ flag * flags;
 
 #define combine(upper, lower) ((upper<<8) | lower)
 #define IF_CARRY() (flags->carry & 0xFF)
-#define SET_ZERO(x) flags->zero = (x & 0xFF)
-#define SET_SIGN(x) flags->sign = ((x >> 7) & 1)
+
 #define SET_CARRY(x) flags->carry = ((x) & 0xFF)
-#define SET_OVERFLOW(x) flags->overflow = (x & 0xFF)
-#define SET_BREAK(x) flags->break_cmd = x
+#define SET_ZERO(x) flags->zero = (x & 0xFF)
 #define SET_INTERRUPT(x) flags->interrupt = x
+#define SET_BREAK(x) flags->break_cmd = x
+#define SET_OVERFLOW(x) flags->overflow = (x & 0xFF)
+#define SET_SIGN(x) flags->sign = ((x >> 7) & 1)
+
+
+
 
 void cpu_init();
 void reset();
+
+static inline uint8_t cpu_status();
 inline uint8_t next();
 inline uint16_t next16();
 inline uint16_t fetch16(uint16_t address);
