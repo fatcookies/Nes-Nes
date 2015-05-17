@@ -180,8 +180,24 @@ void exec() {
 		case 0xAC: ins_ldy(fetch(absolute()));   break;
 		case 0xBC: ins_ldy(fetch(absolute_x())); break;
 
+		//STA
+		case 0x85: ins_sta(fetch(zeropage()));   break;
+		case 0x95: ins_sta(fetch(zeropage_x())); break;
+		case 0x8D: ins_sta(fetch(absolute()));   break;
+		case 0x9D: ins_sta(fetch(absolute_x())); break;
+		case 0x99: ins_sta(fetch(absolute_y())); break;
+		case 0x81: ins_sta(fetch(indirect_x())); break;
+		case 0x91: ins_sta(fetch(indirect_y())); break;
 
+		//STX
+		case 0x86: ins_stx(fetch(zeropage())); break;
+		case 0x96: ins_stx(fetch(zeropage_y())); break;
+		case 0x8E: ins_stx(fetch(absolute())); break;
 
+		//STY
+		case 0x84: ins_stx(fetch(zeropage())); break;
+		case 0x94: ins_stx(fetch(zeropage_x())); break;
+		case 0x8C: ins_stx(fetch(absolute())); break;
 	}
 
 }
@@ -202,7 +218,11 @@ int main() {
 
 	store(512, 0x71);
 	store(513, 0x02);
-	//store(0x514, 0x10);
+
+	store(514, 0xAD);
+	store(515, 0x05);
+	store(516, 0x06);
+
 	registers->x = 2;
 	registers->y = 6;
 
@@ -216,5 +236,9 @@ int main() {
 	printf("%u\n",registers->acc);
 	asl(0,0);
 	printf("%u\n",registers->acc);
+
+	exec();
+	printf("32? = %u \n",registers->acc);
+
 	return 0;
 }

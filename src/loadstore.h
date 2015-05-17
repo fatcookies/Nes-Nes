@@ -8,9 +8,9 @@ inline void ins_ldx(uint8_t value);
 
 inline void ins_ldy(uint8_t value);
 
-inline void ins_sta(uint8_t value);
+inline void ins_sta(uint16_t address);
 
-inline void ins_stx(uint8_t value);
+inline void ins_stx(uint16_t address);
 
-inline void ins_sty(uint8_t value);
+inline void ins_sty(uint16_t address);
 
