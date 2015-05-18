@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "cpu.h"
@@ -28,7 +27,7 @@ void cpu_init() {
 	registers = malloc(sizeof (reg));
 	flags = malloc(sizeof (flags));
 
-	registers->pc = 512;
+	registers->pc = 0x8000;
 	registers->sp = 0x1FF;
 	registers->acc = 0;
 	registers->x = 0;
@@ -279,7 +278,7 @@ void exec() {
 		case 0xB8: ins_clv(); break;
 		case 0x38: ins_sec(); break;
 		case 0xF8: ins_sed(); break;
-		case 0x7F: ins_sei(); break;
+		case 0x78: ins_sei(); break;
 
 		// Misc/System Function Operations
 		case 0x00: ins_brk(); break;
@@ -292,16 +291,4 @@ void exec() {
 	}
 
 
-}
-
-int main() {
-	cpu_init();
-	ins_lda(69);
-	printf("acc = %u\n",registers->acc);
-	printf("v = %u, c = %u\n", IF_OVERFLOW(), IF_CARRY());
-	ins_sbc(60);
-	printf("acc = %u\n",registers->acc);
-	printf("v = %u, c = %u\n", IF_OVERFLOW(), IF_CARRY());
-	
-	return 0;
 }

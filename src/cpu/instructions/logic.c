@@ -26,10 +26,8 @@ inline void ins_ora(uint8_t value) {
 
 
 inline void ins_bit(uint8_t value) {
-
-	//TODO: verify this is correct
-
-	SET_SIGN(value);
-    SET_OVERFLOW(0x40 & value);	/* Copy bit 6 to OVERFLOW flag. */
-    SET_ZERO(value & registers->acc);
+	uint8_t test = registers->acc & value;
+	SET_SIGN(test);
+	SET_OVERFLOW(((test >> 6) & 1));
+	SET_ZERO(test);
 }
