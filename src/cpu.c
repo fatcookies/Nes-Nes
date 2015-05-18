@@ -25,20 +25,11 @@ void cpu_init() {
 	registers->x = 0;
 	registers->y = 0;
 
-	flags->carry = 0;
-	flags->zero = 0;
-	flags->interrupt = 0;
-	flags->dec = 0;
-	flags->break_cmd = 0;
-	flags->overflow = 0;
-	flags->sign = 0;
+	*flags = 0;
 }
 
 inline uint8_t cpu_status() {
-	return (flags->carry & 1) | ((flags->zero & 1) << 1) 
-		| ((flags->interrupt & 1) << 2) | ((flags->dec& 1) << 3)
-		| ((flags->break_cmd & 1) << 4) | ((flags->overflow & 1) <<6) 
-		| ((flags->sign & 1) << 7);
+	return *flags;
 }
 
 void reset() {
@@ -129,10 +120,10 @@ int main() {
 	cpu_init();
 	ins_lda(69);
 	printf("acc = %u\n",registers->acc);
-	printf("v = %u, c = %u\n", flags->overflow, flags->carry);
+	printf("v = %u, c = %u\n", IF_OVERFLOW(), IF_CARRY());
 	ins_sbc(60);
 	printf("acc = %u\n",registers->acc);
-	printf("v = %u, c = %u\n", flags->overflow, flags->carry);
+	printf("v = %u, c = %u\n", IF_OVERFLOW(), IF_CARRY());
 	
 	return 0;
 }
