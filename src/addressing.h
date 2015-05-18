@@ -17,6 +17,8 @@ inline uint16_t absolute_x();
 
 inline uint16_t absolute_y();
 
+inline uint16_t indirect();
+
 inline uint16_t indirect_x();
 
 inline uint16_t indirect_y();

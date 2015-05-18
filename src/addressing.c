@@ -29,6 +29,10 @@ inline uint16_t absolute_y() {
 	return next16() + registers->y;
 }
 
+inline uint16_t indirect() {
+	return fetch16(next16());
+}
+
 inline uint16_t indirect_x() {
 	return fetch16(next() + registers->x);
 }
