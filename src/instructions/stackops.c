@@ -17,8 +17,8 @@ inline void ins_pha() {
 }
 
 inline void ins_php() {
-	//TODO: FIX CPU STATUS
-	push(cpu_status());
+	uint8_t status = cpu_status();
+    push(status);
 }
 
 inline void ins_pla() {
@@ -29,6 +29,5 @@ inline void ins_pla() {
 }
 
 inline void ins_plp() {
-	//todo: FIX CPU STATUS
-
+    *flags = pop();
 }
