@@ -40,4 +40,11 @@
 //Pattern Table 0 (256x2x8, may be VROM)
 #define PATTERN_TABLE_0 0x0000
 
+uint8_t* ppu_mem;
+
+void ppumem_init();
+
+uint8_t ppu_fetch(uint16_t address);
+
+uint16_t ppu_store(uint16_t address, uint8_t value);
 

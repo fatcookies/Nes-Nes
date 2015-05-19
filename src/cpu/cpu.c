@@ -66,7 +66,7 @@ inline uint16_t fetch16(uint16_t address) {
 void exec() {
 
 	uint8_t ins = fetch(registers->pc);
-	printf("%x -----ins %x\n",registers->pc,ins);
+	printf("%x -----ins %x ---- cycle:%u\n",registers->pc,ins,cycles);
 	
 	uint8_t inc = 0;
 	switch(ins) {
