@@ -12,10 +12,10 @@ typedef struct {
 	//scroll
 	uint8_t cam_position_x;
 	uint8_t cam_position_y;
-	
-	uint8_t data;
 
 	uint16_t fulladdress;
+	uint8_t data;
+
 } ppu_register;
 
 ppu_register * ppu_registers;

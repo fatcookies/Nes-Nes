@@ -27,9 +27,11 @@ uint8_t* handle_ppu_output(uint16_t address) {
 	switch(address) {
 		case 0x2000: return &(ppu_registers->control1); break;
 		case 0x2001: return &(ppu_registers->control2); break;
-		case 0x2002: return &(ppu_registers->status); break;
 		case 0x2003: return &(ppu_registers->sprite_address); break;
-		case 0x2004: return &(ppu_registers->sprite_data); break;
+		case 0x2004:
+			ppu_registers->sprite_address++;
+			return ppu_oam + ppu_registers->sprite_address - 1;
+			break;
 		case 0x2005: 
 			TOGGLE_LSB_WRITTEN();
 			return IF_LSB_WRITTEN() ? &(ppu_registers->cam_position_x) : &(ppu_registers->cam_position_y); 
@@ -47,15 +49,12 @@ uint8_t* handle_ppu_output(uint16_t address) {
 
 uint8_t* handle_ppu_input(uint16_t address) {
 	switch(address) {
-		case 0x2000: return &(ppu_registers->control1); break;
-		case 0x2001: return &(ppu_registers->control2); break;
 		case 0x2002: 
 			temp = ppu_registers->status;
 			// clear after reading $2002 and at dot 1 of the pre-render line.
 			return &temp;
 			break;
-		case 0x2003: return &(ppu_registers->sprite_address); break;
-		case 0x2004: return &(ppu_registers->sprite_data); break;
+		case 0x2004: return ppu_oam + ppu_registers->sprite_address; break;
 		case 0x2007: return ppu_mem + ppu_registers->fulladdress; break;
 	}
 	

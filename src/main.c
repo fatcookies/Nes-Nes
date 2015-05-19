@@ -31,21 +31,18 @@ void test() {
 		ppu_store((i+PATTERN_TABLE_0),chr_rom[i]);
 	}
 
-	
+	/*
 	for(i=0; i < 500;i++) {
 		ppu_exec();
 		exec();
+	}*/
+	for(i=0; i < 256; i++) {
+		printf("oam %u = 0x%x\n",i,ppu_oam[i]);
 	}
-	
-	/*
-	store(0x2006,0x10);
-	store(0x2006,0x12);
-	ppu_mem[0x1012] = 0x69;
+	printf("\n");
 
-	printf("ppuaddr=0x%x\n",ppu_registers->fulladdress);
-	printf("0x1012 ppu = 0x%x\n",fetch(0x2007));
-	*/
-	
+	store(0x4014,0x80);
+
 	printf("\n\npc= 0x%x\n",registers->pc);
 	printf("sp= 0x%x\n",registers->sp);
 	printf("acc=0x%x\n",registers->acc);

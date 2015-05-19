@@ -3,3 +3,4 @@
 #endif
 
 #include "../ppu/ppu.h"
+#include "../ppu/ppu_memory.h"

@@ -3,6 +3,7 @@
 #endif
 
 #define PPU_MEMORY_SIZE 0x4000
+#define OAM_MEMORY_SIZE 0x100
 
 //Sprite Palette
 #define SPRITE_PALETTE 0x3F10
@@ -41,6 +42,7 @@
 #define PATTERN_TABLE_0 0x0000
 
 uint8_t* ppu_mem;
+uint8_t* ppu_oam;
 
 void ppumem_init();
 
@@ -48,3 +50,6 @@ uint8_t ppu_fetch(uint16_t address);
 
 uint16_t ppu_store(uint16_t address, uint8_t value);
 
+uint8_t ppu_oam_fetch(uint8_t address);
+
+uint8_t ppu_oam_store(uint8_t address, uint8_t value);
