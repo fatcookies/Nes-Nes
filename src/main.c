@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 void test();
-void printBits(size_t const size, void const * const ptr);
+
 
 int main() {
 	test();
@@ -15,11 +15,10 @@ int main() {
 void test() {
 	FILE *f;
 	unsigned char buffer[0x10000];
-	int n = 0;
 	f = fopen("smb.nes", "rb");
 	fseek(f,16,0);
 	if (f) {
-    	n = fread(buffer, 1, sizeof buffer, f);
+    	fread(buffer, 1, sizeof buffer, f);
 	}
 
 
@@ -34,9 +33,8 @@ void test() {
 		store((i+0x8000),buffer[i]);
 	}
 
-	store(0x2002,0x80);
 
-	for(i=0; i < 60;i++) {
+	for(i=0; i < 500;i++) {
 		exec();
 	}
 	

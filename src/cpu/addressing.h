@@ -22,3 +22,10 @@ inline uint16_t indirect();
 inline uint16_t indirect_x();
 
 inline uint16_t indirect_y();
+
+
+inline uint16_t absolute_x_pages();
+
+inline uint16_t absolute_y_pages();
+
+inline uint16_t indirect_y_pages();

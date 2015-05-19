@@ -7,7 +7,7 @@ void ppu_init() {
 
 	ppu_registers->control1       = 0;
 	ppu_registers->control2       = 0;
-	ppu_registers->status         = 0;
+	ppu_registers->status         = 0xA0;
 	ppu_registers->sprite_address = 0;
 	ppu_registers->sprite_data    = 0;
 	ppu_registers->scroll         = 0;

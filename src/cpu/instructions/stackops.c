@@ -3,13 +3,13 @@
 #include "stackops.h"
 
 inline void ins_tsx() {
-    SET_SIGN(registers->sp);
-    SET_ZERO(registers->sp);
-    registers->x = registers->sp;
+    SET_SIGN(registers->sp & 0xFF);
+    SET_ZERO(registers->sp & 0xFF);
+    registers->x = registers->sp & 0xFF;
 }
 
 inline void ins_txs() {
-	registers->sp = registers->x;
+	registers->sp = 0x100 + registers->x;
 }
 
 inline void ins_pha() {

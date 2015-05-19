@@ -40,3 +40,32 @@ inline uint16_t indirect_x() {
 inline uint16_t indirect_y() {
 	return fetch16(next()) + registers->y;
 }
+
+
+//special addressing modes where page boundaries may be crossed
+inline uint16_t absolute_x_pages() {
+	uint16_t temp = next16();
+	uint16_t res = temp + registers->x;
+	if((temp & res) >> 8) {
+		cycles++;
+	}
+	return res;
+}
+
+inline uint16_t absolute_y_pages() {
+	uint16_t temp = next16();
+	uint16_t res = temp + registers->y;
+	if((temp & res) >> 8) {
+		cycles++;
+	}
+	return res;
+}
+
+inline uint16_t indirect_y_pages() {
+	uint16_t temp = fetch16(next());
+	uint16_t res = temp + registers->y;
+	if((temp & res) >> 8) {
+		cycles++;
+	}
+	return res;
+}

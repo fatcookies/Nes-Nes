@@ -19,6 +19,7 @@ typedef struct {
 
 } reg;
 
+uint32_t cycles;
 uint8_t *flags;
 reg * registers;
 
