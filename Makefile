@@ -7,7 +7,7 @@ SRCS    := $(shell find $(SRCDIR) -name '*.c')
 SRCDIRS := $(shell find . -name '*.c' -exec dirname {} \; | uniq)
 OBJS    := $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
-CFLAGS  = -Wall -O3
+CFLAGS  = -Wall
 LDFLAGS =
 
 

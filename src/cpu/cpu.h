@@ -22,13 +22,15 @@ typedef struct {
 uint8_t *flags;
 reg * registers;
 
-#define SET_CARRY(x)     *flags |= (x ? 1 : 0)
-#define SET_ZERO(x)      *flags |= (x ? 0 : 1) << 1
-#define SET_INTERRUPT(x) *flags |= (x ? 1 : 0) << 2
-#define SET_DEC(x)       *flags |= (x ? 1 : 0) << 3
-#define SET_BREAK(x)     *flags |= (x ? 1 : 0) << 4
-#define SET_OVERFLOW(x)  *flags |= (x ? 1 : 0) << 6
-#define SET_SIGN(x)      *flags |= ((x >> 7) & 1) << 7
+#define SETBIT(f,x,n)	(f ^= (-x ^ f) & (1 << n));
+
+#define SET_CARRY(x)     SETBIT(*flags, (x ? 1 : 0), 0);
+#define SET_ZERO(x)      SETBIT(*flags, (x ? 0 : 1), 1);
+#define SET_INTERRUPT(x) SETBIT(*flags, (x ? 1 : 0), 2);
+#define SET_DEC(x)       SETBIT(*flags, (x ? 1 : 0), 3);
+#define SET_BREAK(x)     SETBIT(*flags, (x ? 1 : 0), 4);
+#define SET_OVERFLOW(x)  SETBIT(*flags, (x ? 1 : 0), 6);
+#define SET_SIGN(x)      SETBIT(*flags, ((x >> 7) & 1), 7);
 
 #define IF_CARRY()    ((*flags) & 1)
 #define IF_ZERO()     ((*flags >> 1) & 1)

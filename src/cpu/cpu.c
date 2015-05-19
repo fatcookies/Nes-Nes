@@ -45,8 +45,8 @@ void reset() {
 }
 
 inline uint8_t next() {
-	uint8_t res = fetch(registers->pc);
 	registers->pc = registers->pc + 1;
+	uint8_t res = fetch(registers->pc);
 	return res;
 }
 
@@ -64,9 +64,10 @@ inline uint16_t fetch16(uint16_t address) {
 
 void exec() {
 
-	uint8_t ins = next();
+	uint8_t ins = fetch(registers->pc);
+	printf("%x -----ins %x\n",registers->pc,ins);
 	
-
+	uint8_t inc = 0;
 	switch(ins) {
 
 		// Load/Store Instructions
@@ -255,21 +256,21 @@ void exec() {
 
 		// Jumps and Call Operations
 		//JMP
-		case 0x4C: ins_jmp(absolute()); break;
-		case 0x6C: ins_jmp(indirect()); break;
+		case 0x4C: ins_jmp(absolute()); inc = 1; break;
+		case 0x6C: ins_jmp(indirect()); inc = 1; break;
 
-		case 0x20: ins_jsr(absolute()); break;
-		case 0x60: ins_rts();           break;
+		case 0x20: ins_jsr(absolute()); inc = 1; break;
+		case 0x60: ins_rts();           inc = 1; break;
 
 		// Branch Operations
-		case 0x90: ins_bcc(next()); break;
-		case 0xB0: ins_bcs(next()); break;
-		case 0xF0: ins_beq(next()); break;
-		case 0x30: ins_bmi(next()); break;
-		case 0xD0: ins_bne(next()); break;
-		case 0x10: ins_bpl(next()); break;
-		case 0x50: ins_bvc(next()); break;
-		case 0x70: ins_bvs(next()); break;
+		case 0x90: ins_bcc(next()); inc = 1; break;
+		case 0xB0: ins_bcs(next()); inc = 1; break;
+		case 0xF0: ins_beq(next()); inc = 1; break;
+		case 0x30: ins_bmi(next()); inc = 1; break;
+		case 0xD0: ins_bne(next()); inc = 1; break;
+		case 0x10: ins_bpl(next()); inc = 1; break;
+		case 0x50: ins_bvc(next()); inc = 1; break;
+		case 0x70: ins_bvs(next()); inc = 1; break;
 
 		// Process Status Flag Operations
 		case 0x18: ins_clc(); break;
@@ -281,14 +282,16 @@ void exec() {
 		case 0x78: ins_sei(); break;
 
 		// Misc/System Function Operations
-		case 0x00: ins_brk(); break;
-		case 0xEA: ins_nop(); break;
-		case 0x40: ins_rti(); break;
+		case 0x00: ins_brk(); inc = 1; break;
+		case 0xEA: ins_nop();          break;
+		case 0x40: ins_rti(); inc = 1; break;
 
 		default:
 			// do something error
 		break;
 	}
-
+	if(!inc) {
+		registers->pc = registers->pc + 1;
+	}
 
 }

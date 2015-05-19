@@ -2,6 +2,4 @@
 #include <stdint.h>
 #endif
 
-void push(uint8_t val);
-
-uint8_t pop();
+#include "../ppu/ppu.h"
