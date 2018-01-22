@@ -42,11 +42,12 @@ reg * registers;
 
 void cpu_init();
 void reset();
-inline uint8_t cpu_status();
+uint8_t cpu_status();
 
-inline uint8_t next();
-inline uint16_t next16();
-inline uint16_t fetch16(uint16_t address);
+uint8_t next();
+uint16_t next16();
+uint16_t fetch16(uint16_t address);
 
 void exec();
+void tick();
 

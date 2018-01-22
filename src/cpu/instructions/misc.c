@@ -4,7 +4,7 @@
 #include "../memory.h"
 
 // todo: not sure about this
-inline void ins_brk() {
+void ins_brk() {
 	registers->pc++;
     push((registers->pc >> 8) & 0xff); /* Push return address onto the stack. */
     push(registers->pc & 0xff);
@@ -14,11 +14,11 @@ inline void ins_brk() {
     registers->pc = (fetch(0xFFFE) | (fetch(0xFFFF) << 8));
 }
 
-inline void ins_nop() {
+void ins_nop() {
 	
 }
 
-inline void ins_rti() {
+void ins_rti() {
 	uint16_t src = pop();
     *flags = src & 0xFF;
     src = pop();

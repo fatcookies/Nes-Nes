@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "cpu.h"
 #include "memory.h"
@@ -37,7 +38,7 @@ void cpu_init() {
 	*flags = 0;
 }
 
-inline uint8_t cpu_status() {
+uint8_t cpu_status() {
 	return *flags;
 }
 
@@ -45,28 +46,36 @@ void reset() {
 	cpu_init();
 }
 
-inline uint8_t next() {
+uint8_t next() {
 	registers->pc = registers->pc + 1;
 	uint8_t res = fetch(registers->pc);
 	return res;
 }
 
-inline uint16_t next16() {
+uint16_t next16() {
 	uint8_t a = next();
 	uint8_t b = next();
 	return combine(b,a);
 }
 
-inline uint16_t fetch16(uint16_t address) {
+uint16_t fetch16(uint16_t address) {
 	uint8_t a = fetch(address);
 	uint8_t b = fetch(address + 1);
 	return combine(b,a);
 }
 
+void tick() {
+	if(cycles) {
+		cycles--;
+	} else {
+		exec();
+	}
+}
+
 void exec() {
 
 	uint8_t ins = fetch(registers->pc);
-	printf("%x -----ins %x ---- cycle:%u\n",registers->pc,ins,cycles);
+	printf("%x -----ins %x\n",registers->pc,ins);
 	
 	uint8_t inc = 0;
 	switch(ins) {

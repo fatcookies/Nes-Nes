@@ -1,6 +1,6 @@
 #include "../cpu.h"
 
-inline void ins_and(uint8_t value) {
+void ins_and(uint8_t value) {
 	value &= registers->acc;
 	SET_SIGN(value);
 	SET_ZERO(value);
@@ -8,7 +8,7 @@ inline void ins_and(uint8_t value) {
 	registers->acc = value;
 }
 
-inline void ins_eor(uint8_t value) {
+void ins_eor(uint8_t value) {
 	value ^= registers->acc;
 	SET_SIGN(value);
 	SET_ZERO(value);
@@ -16,7 +16,7 @@ inline void ins_eor(uint8_t value) {
 	registers->acc = value;
 }
 
-inline void ins_ora(uint8_t value) {
+void ins_ora(uint8_t value) {
 	value |= registers->acc;
 	SET_SIGN(value);
 	SET_ZERO(value);
@@ -25,7 +25,7 @@ inline void ins_ora(uint8_t value) {
 }
 
 
-inline void ins_bit(uint8_t value) {
+void ins_bit(uint8_t value) {
 	uint8_t test = registers->acc & value;
 	SET_SIGN(test);
 	SET_OVERFLOW(((test >> 6) & 1));

@@ -1,7 +1,7 @@
-inline void ins_tax();
+void ins_tax();
 
-inline void ins_tay();
+void ins_tay();
 
-inline void ins_txa();
+void ins_txa();
 
-inline void ins_tya();
+void ins_tya();

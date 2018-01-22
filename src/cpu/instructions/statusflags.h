@@ -2,16 +2,16 @@
 #include <stdint.h>
 #endif
 
-inline void ins_clc();
+void ins_clc();
 
-inline void ins_cld();
+void ins_cld();
 
-inline void ins_cli();
+void ins_cli();
 
-inline void ins_clv();
+void ins_clv();
 
-inline void ins_sec();
+void ins_sec();
 
-inline void ins_sed();
+void ins_sed();
 
-inline void ins_sei();
+void ins_sei();

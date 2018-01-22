@@ -2,8 +2,8 @@
 #include <stdint.h>
 #endif
 
-inline void ins_brk();
+void ins_brk();
 
-inline void ins_nop();
+void ins_nop();
 
-inline void ins_rti();
+void ins_rti();

@@ -2,14 +2,14 @@
 #include <stdint.h>
 #endif
 
-inline void ins_inc(uint16_t address);
+void ins_inc(uint16_t address);
 
-inline void ins_inx();
+void ins_inx();
 
-inline void ins_iny();
+void ins_iny();
 
-inline void ins_dec(uint16_t address);
+void ins_dec(uint16_t address);
 
-inline void ins_dex();
+void ins_dex();
 
-inline void ins_dey();
+void ins_dey();

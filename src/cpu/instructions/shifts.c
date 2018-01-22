@@ -2,7 +2,7 @@
 #include "../cpu.h"
 #include "../memory.h"
 
-inline void ins_asl(uint8_t mem, uint8_t address) {
+void ins_asl(uint8_t mem, uint8_t address) {
 	uint8_t val = mem ? fetch(address) : registers->acc;
 
 	SET_CARRY(val & 0x80);
@@ -18,7 +18,7 @@ inline void ins_asl(uint8_t mem, uint8_t address) {
 	}
 }
 
-inline void ins_lsr(uint8_t mem, uint8_t address) {
+void ins_lsr(uint8_t mem, uint8_t address) {
 	uint8_t val = mem ? fetch(address) : registers->acc;
 
 	SET_CARRY(val & 0x01);
@@ -33,7 +33,7 @@ inline void ins_lsr(uint8_t mem, uint8_t address) {
 	}
 }
 
-inline void ins_rol(uint8_t mem, uint8_t address) {
+void ins_rol(uint8_t mem, uint8_t address) {
 	uint8_t val = mem ? fetch(address) : registers->acc;
 
 	val <<= 1;
@@ -50,7 +50,7 @@ inline void ins_rol(uint8_t mem, uint8_t address) {
 	}
 }
 
-inline void ins_ror(uint8_t mem, uint8_t address) {
+void ins_ror(uint8_t mem, uint8_t address) {
 	uint16_t val = mem ? fetch(address) : registers->acc;
 
 	if (IF_CARRY()) val |= 0x100;

@@ -2,6 +2,7 @@
 
 #include "memory.h"
 #include "io.h"
+#include "cpu.h"
 
 void handle_oamdma(uint8_t page);
 uint8_t* handle_input(uint16_t address);

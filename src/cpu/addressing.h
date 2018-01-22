@@ -2,30 +2,29 @@
 #include <stdint.h>
 #endif
 
+extern uint16_t immediate();
 
-inline uint16_t immediate();
+extern uint16_t zeropage();
 
-inline uint16_t zeropage();
+extern uint16_t zeropage_x();
 
-inline uint16_t zeropage_x();
+extern uint16_t zeropage_y();
 
-inline uint16_t zeropage_y();
+extern uint16_t absolute();
 
-inline uint16_t absolute();
+extern uint16_t absolute_x();
 
-inline uint16_t absolute_x();
+extern uint16_t absolute_y();
 
-inline uint16_t absolute_y();
+extern uint16_t indirect();
 
-inline uint16_t indirect();
+extern uint16_t indirect_x();
 
-inline uint16_t indirect_x();
-
-inline uint16_t indirect_y();
+extern uint16_t indirect_y();
 
 
-inline uint16_t absolute_x_pages();
+extern uint16_t absolute_x_pages();
 
-inline uint16_t absolute_y_pages();
+extern uint16_t absolute_y_pages();
 
-inline uint16_t indirect_y_pages();
+extern uint16_t indirect_y_pages();

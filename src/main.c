@@ -31,17 +31,9 @@ void test() {
 		ppu_store((i+PATTERN_TABLE_0),chr_rom[i]);
 	}
 
-	/*
 	for(i=0; i < 500;i++) {
-		ppu_exec();
-		exec();
-	}*/
-	for(i=0; i < 256; i++) {
-		printf("oam %u = 0x%x\n",i,ppu_oam[i]);
+		tick();
 	}
-	printf("\n");
-
-	store(0x4014,0x80);
 
 	printf("\n\npc= 0x%x\n",registers->pc);
 	printf("sp= 0x%x\n",registers->sp);
